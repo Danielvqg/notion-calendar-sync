@@ -176,7 +176,7 @@ app.delete('/webhook/test/history', (req, res) => {
 });
 
 // Endpoint para webhook de Notion CON verificación
-app.post('/webhook/notion', verifyNotionWebhook, async (req, res) => {
+app.post('/webhook/notion', async (req, res) => {
     writeLog('info', 'Webhook received from Notion', {
         body: req.body,
         headers: req.headers
