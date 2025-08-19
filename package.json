@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node sync.js",
+    "start": "node webhook-server.js",
     "sync": "node sync.js",
     "dev": "nodemon sync.js",
     "test": "node test.js",
