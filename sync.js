@@ -26,6 +26,7 @@ const CONFIG = {
             'review': process.env.PERSONAL_CALENDAR_ID || 'primary',
             'business': process.env.BUSINESS_CALENDAR_ID || 'your-business@gmail.com',
             'social': process.env.SOCIAL_CALENDAR_ID || 'your-social@gmail.com',
+            'health': process.env.HEALTH_CALENDAR_ID || 'your-health@gmail.com',
             'default': 'primary'
         },
         // Priority-based color coding
@@ -239,11 +240,19 @@ class GoogleCalendarManager {
                 if (task.startTime && task.endTime) {
                     startDateTime = task.startTime;
                     endDateTime = task.endTime;
+                }
+                // allDay
+                else if (task.dueDate) {
+                    const dueDate = new Date(task.dueDate);
+                    return {
+                        startDate: dueDate.toISOString().split('T')[0], // YYYY-MM-DD
+                        endDate: dueDate.toISOString().split('T')[0],
+                        allDay: true
+                    };
                 } else {
                     return null;
                 }
                 break;
-
             case 'In Progress':
                 // startTime + timeMinutes
                 if (task.startTime) {
@@ -263,7 +272,7 @@ class GoogleCalendarManager {
                     const start = new Date(task.startTime);
                     const end = new Date(start.getTime() + (task.timeMinutes * 60 * 1000));
                     endDateTime = end.toISOString();
-                // allDay
+                    // allDay
                 } else if (task.dueDate) {
                     const dueDate = new Date(task.dueDate);
                     return {
