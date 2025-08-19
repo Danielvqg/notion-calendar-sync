@@ -1,0 +1,22 @@
+{
+  "name": "notion-google-calendar",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node sync.js",
+    "sync": "node sync.js",
+    "dev": "nodemon sync.js",
+    "test": "node test.js",
+    "setup": "node setup.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@notionhq/client": "^4.0.2",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "googleapis": "^156.0.0"
+  }
+}

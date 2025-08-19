@@ -1,0 +1,43 @@
+require('dotenv').config();
+
+function validateConfig() {
+  console.log('🔍 Validating configuration...\n');
+  
+  const required = [
+    'NOTION_TOKEN',
+    'NOTION_DATABASE_ID', 
+    'GOOGLE_CLIENT_ID',
+    'GOOGLE_CLIENT_SECRET',
+    'GOOGLE_REFRESH_TOKEN'
+  ];
+  
+  const missing = required.filter(key => !process.env[key]);
+  
+  if (missing.length > 0) {
+    console.error('❌ Missing required environment variables:');
+    missing.forEach(key => console.error(`   • ${key}`));
+    console.error('\nRun: node setup.js to configure');
+    process.exit(1);
+  }
+  
+  // Validate format
+  if (!process.env.NOTION_TOKEN.startsWith('secret_')) {
+    console.warn('⚠️  Warning: NOTION_TOKEN should start with "secret_"');
+  }
+  
+  if (!process.env.NOTION_DATABASE_ID.match(/^[a-f0-9]{32}$/)) {
+    console.warn('⚠️  Warning: NOTION_DATABASE_ID should be 32 hex characters');
+  }
+  
+  if (!process.env.GOOGLE_CLIENT_ID.includes('googleusercontent.com')) {
+    console.warn('⚠️  Warning: GOOGLE_CLIENT_ID should end with googleusercontent.com');
+  }
+  
+  console.log('✅ Configuration validation passed\n');
+}
+
+if (require.main === module) {
+  validateConfig();
+}
+
+module.exports = { validateConfig };

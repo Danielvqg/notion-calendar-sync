@@ -1,0 +1,12 @@
+# docker-compose.yml
+version: '3.8'
+services:
+  notion-sync:
+    build: .
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
