@@ -25,6 +25,7 @@ const CONFIG = {
             'exam': process.env.STUDY_CALENDAR_ID || 'your-study@gmail.com',
             'review': process.env.PERSONAL_CALENDAR_ID || 'primary',
             'business': process.env.BUSINESS_CALENDAR_ID || 'your-business@gmail.com',
+            'social': process.env.SOCIAL_CALENDAR_ID || 'your-social@gmail.com',
             'default': 'primary'
         },
         // Priority-based color coding
