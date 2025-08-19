@@ -256,18 +256,25 @@ class GoogleCalendarManager {
                 break;
 
             case 'Not Started':
+                // programmed?
+                if (task.startTime) {
+                    startDateTime = task.startTime;
+                    const start = new Date(task.startTime);
+                    const end = new Date(start.getTime() + (task.timeMinutes * 60 * 1000));
+                    endDateTime = end.toISOString();
                 // allDay
-                if (task.dueDate) {
+                } else if (task.dueDate) {
                     const dueDate = new Date(task.dueDate);
                     return {
                         startDate: dueDate.toISOString().split('T')[0], // YYYY-MM-DD
                         endDate: dueDate.toISOString().split('T')[0],
                         allDay: true
                     };
+
                 } else {
                     return null;
                 }
-
+                break;
             default:
                 // fallback
                 if (task.startTime && task.endTime) {
